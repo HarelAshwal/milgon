@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Milgon.Windows.Win_MilgotReport" Height="600" Width="1000" FlowDirection="RightToLeft" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:w="clr-namespace:Milgon" Loaded="Window_Loaded">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="30" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <DataGrid Name="dataGrid_Report" Grid.Row="2" AutoGenerateColumns="False" MouseDoubleClick="dataGrid_Report_MouseDoubleClick" CellEditEnding="dataGrid_Report_CellEditEnding">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="מספר" IsReadOnly="True" Binding="{Binding Path=Id}" />
+        <DataGridTextColumn Header="שם" IsReadOnly="True" Binding="{Binding Path=Name}" />
+        <DataGridTextColumn Header="הפחתה חסרון שעות" IsReadOnly="True" Binding="{Binding Path=MissingHoursReduction, StringFormat=F02}" />
+        <DataGridTextColumn Header="סה&quot;כ בסיס" Binding="{Binding Path=MilgaAmountBase}" />
+        <DataGridTextColumn Header="בונוס א" IsReadOnly="True" Binding="{Binding Path=BonusSederA}" />
+        <DataGridTextColumn Header="בונוס ב" IsReadOnly="True" Binding="{Binding Path=BonusSederB}" />
+        <DataGridTextColumn Header="סה&quot;כ בונוסים" IsReadOnly="True" Binding="{Binding Path=BonusSederTotal}" />
+        <DataGridTextColumn Header="בסיס ובונוס" Binding="{Binding Path=MilgaAmountBaseAndBonus}" />
+        <DataGridTextColumn Header="סכום לתשלום" Binding="{Binding Path=MilgaAmount}" />
+        <DataGridTextColumn Header="סה&quot;כ שעות" IsReadOnly="True" Binding="{Binding Path=ExpectedHours.TotalHours, StringFormat=F02}" />
+        <DataGridTextColumn Header="שעות נוכחות" IsReadOnly="True" Binding="{Binding Path=TotalTime.TotalHours, StringFormat=F02}" />
+        <DataGridTextColumn Header="אחוז נוכחות" IsReadOnly="True" Binding="{Binding Path=PresencePrecentage, StringFormat=F00}" />
+        <DataGridTextColumn Header="שעות מאושרות" IsReadOnly="True" Binding="{Binding Path=ApprovedTime.TotalHours, StringFormat=F02}" />
+        <DataGridTextColumn Header="חסרון שעות" IsReadOnly="True" Binding="{Binding Path=MissingTime.TotalHours, StringFormat=F02}" />
+        <DataGridTextColumn Header="אחוז חסרון" IsReadOnly="True" Binding="{Binding Path=NonPresencePrecentage, StringFormat=F00}" />
+        <DataGridTextColumn Header="ימי חיסור א" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountSederA_Absence}" />
+        <DataGridTextColumn Header="איחורים א" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountLateSederAOnly}" />
+        <DataGridTextColumn Header="הפסקות א" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountNotTookAllowedBreakSederAOnly}" />
+        <DataGridTextColumn Header="חסרון בונוס א" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountViolateBonusSederA}" />
+        <DataGridTextColumn Header="אישורים א" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountIsApprovedInOrOutSederA}" />
+        <DataGridTextColumn Header="זכאות בונוס א" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountGotBonusSederA}" />
+        <DataGridTextColumn Header="ימי חיסור ב" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountSederB_Absence}" />
+        <DataGridTextColumn Header="איחורים ב" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountLateSederBOnly}" />
+        <DataGridTextColumn Header="הפסקות ב" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountNotTookAllowedBreakSederBOnly}" />
+        <DataGridTextColumn Header="חסרון בונוס ב" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountViolateBonusSederB}" />
+        <DataGridTextColumn Header="אישורים ב" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountIsApprovedInOrOutSederB}" />
+        <DataGridTextColumn Header="זכאות בונוס ב" IsReadOnly="True" Binding="{Binding Path=entranceDataMonth.CountGotBonusSederB}" />
+        <DataGridTextColumn Header="סיכומים" IsReadOnly="True" Binding="{Binding Path=BonusSummary}" />
+        <DataGridTextColumn Header="כולל בוקר" IsReadOnly="False" Binding="{Binding Path=KolelBokerAdditions}" />
+        <DataGridTextColumn Header="כולל ערב" IsReadOnly="False" Binding="{Binding Path=KolelErev}" />
+        <DataGridTextColumn Header="כולל שישי" IsReadOnly="False" Binding="{Binding Path=KolelShishiTotal}" />
+        <DataGridTextColumn Header="השלמות" IsReadOnly="False" Binding="{Binding Path=LastMonthAdditions}" />
+        <DataGridTextColumn Header="תוספות" IsReadOnly="False" Binding="{Binding Path=Additions}" />
+        <DataGridTextColumn Header="שונות" IsReadOnly="False" Binding="{Binding Path=Others}" />
+        <DataGridTextColumn Header="הורדת דקות" IsReadOnly="False" Binding="{Binding Path=MinutesReduction}" />
+        <DataGridCheckBoxColumn Header="התעלם משעות" IsReadOnly="True" Binding="{Binding Path=IsIgnoreHours}" />
+        <DataGridTextColumn Header="חבורות" IsReadOnly="False" Binding="{Binding Path=Haborot}" />
+        <DataGridTextColumn Header="סיכומים" IsReadOnly="False" Binding="{Binding Path=Sikumim}" />
+        <DataGridTextColumn Header="מבחנים" IsReadOnly="False" Binding="{Binding Path=Mivhanim}" />
+
+      </DataGrid.Columns>
+    </DataGrid>
+    <StackPanel Orientation="Horizontal">
+      <Button Name="button_Print" Content="הכל" Height="23" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Row="0" Click="button_Print_Click" />
+      <Button  Margin="10,0,0,0" Content="בונוסים" Height="23" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Row="0" Click="button_PrintBonos_Click" />
+      <Button  Margin="10,0,0,0" Content="נוכחות" Height="23" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Row="0" Click="button_Print_PresenceClick" />
+      <Button  Margin="10,0,0,0" Content="סכומים" Height="23" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Row="0" Click="button_PrintTotal_Click" />
+      <Button  Margin="10,0,0,0" Content="סיכומים" Height="23" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Row="0" Click="button_PrintSummary_Click" />
+
+    </StackPanel>
+ 
+  </Grid>
+</UserControl>

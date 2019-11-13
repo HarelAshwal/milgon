@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Milgon.Windows.Win_DeatiledMilgaReport" FlowDirection="RightToLeft" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" Loaded="UserControl_Loaded">
+  <StackPanel>
+    <Button Name="button_Print" Content="הדפסה" Height="23" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Row="0" Click="button_Print_Click" />
+    <DataGrid Name="dataGrid_DeatiledReport" AutoGenerateColumns="False">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="תאריך" Binding="{Binding Path=DayDate, StringFormat=dd/MM/yyyy}" />
+        <DataGridTextColumn Header="כניסה" Binding="{Binding Path=SederA.In.RecordTime, StringFormat=HH:mm}">
+          <DataGridTextColumn.CellStyle>
+            <Style TargetType="{x:Type DataGridCell}">
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=SederA.In.IsApproved}">
+                  <Setter Property="Control.Background" Value="#FFADD8E6" />
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </DataGridTextColumn.CellStyle>
+        </DataGridTextColumn>
+        <DataGridTextColumn Header="יציאה" Binding="{Binding Path=SederA.Out.RecordTime, StringFormat=HH:mm}" />
+        <DataGridCheckBoxColumn Header="הפסקה" Binding="{Binding Path=SederA.IsTookAllowedBreak}" />
+        <DataGridCheckBoxColumn Header="איחור" Binding="{Binding Path=SederA.IsLate}" />
+        <DataGridCheckBoxColumn Header="בונוס" Binding="{Binding Path=SederA.IsGotBonus}" />
+        <DataGridTextColumn Header="מאושר" Binding="{Binding Path=SederA.ApprovedTime}" />
+        <DataGridTextColumn Header="חיסור" Binding="{Binding Path=SederA.MissingTime}" />
+        <DataGridTextColumn Header="כניסה" Binding="{Binding Path=SederB.In.RecordTime, StringFormat=HH:mm}" />
+        <DataGridTextColumn Header="יציאה" Binding="{Binding Path=SederB.Out.RecordTime, StringFormat=HH:mm}" />
+        <DataGridCheckBoxColumn Header="הפסקה" Binding="{Binding Path=SederB.IsTookAllowedBreak}" />
+        <DataGridCheckBoxColumn Header="איחור" Binding="{Binding Path=SederB.IsLate}" />
+        <DataGridCheckBoxColumn Header="בונוס" Binding="{Binding Path=SederB.IsGotBonus}" />
+        <DataGridTextColumn Header="מאושר" Binding="{Binding Path=SederB.ApprovedTime}" />
+        <DataGridTextColumn Header="חיסור" Binding="{Binding Path=SederB.MissingTime}" />
+      </DataGrid.Columns>
+    </DataGrid>
+  </StackPanel>
+</UserControl>
