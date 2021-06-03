@@ -19,6 +19,7 @@
         <DataGridTextColumn Header="סה&quot;כ שעות" IsReadOnly="True" Binding="{Binding Path=ExpectedHours.TotalHours, StringFormat=F02}" />
         <DataGridTextColumn Header="שעות נוכחות" IsReadOnly="True" Binding="{Binding Path=TotalTime.TotalHours, StringFormat=F02}" />
         <DataGridTextColumn Header="אחוז נוכחות" IsReadOnly="True" Binding="{Binding Path=PresencePrecentage, StringFormat=F00}" />
+        
         <DataGridTextColumn Header="שעות מאושרות" IsReadOnly="True" Binding="{Binding Path=ApprovedTime.TotalHours, StringFormat=F02}" />
         <DataGridTextColumn Header="חסרון שעות" IsReadOnly="True" Binding="{Binding Path=MissingTime.TotalHours, StringFormat=F02}" />
         <DataGridTextColumn Header="אחוז חסרון" IsReadOnly="True" Binding="{Binding Path=NonPresencePrecentage, StringFormat=F00}" />

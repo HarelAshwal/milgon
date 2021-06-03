@@ -54,7 +54,15 @@ namespace Milgon
 					int num3 = dataRow[1].ToInt();
 					string str2 = dataRow[2].ToString();
 					AvrechMonthData avrechMonthDatum = new AvrechMonthData(new int?(num3), str2);
-					i = num2;
+          bool IsOnlySederA = false;
+          bool IsOnlySederB = false;
+          if (dataRow[0].ToString().Trim() == "א") IsOnlySederA = true;
+          if (dataRow[0].ToString().Trim() == "ב") IsOnlySederB = true;
+
+          avrechMonthDatum.IsOnlySederA = IsOnlySederA;
+          avrechMonthDatum.IsOnlySederB = IsOnlySederB;
+
+          i = num2;
 					while (i < dt.Columns.Count)
 					{
 						dt.Rows[num1][i].ToString();
@@ -88,7 +96,7 @@ namespace Milgon
 											dataRow[i] = "900";
 										}
 									}
-									avrechMonthDatum.AddDayEntry(EnteranceRecord.Parse(dataRow[i], CommonLibrary.CommonmilgaStructure.SederA, EnteranceRecord.RecordType.Enter), EnteranceRecord.Parse(dataRow[i + 1], CommonLibrary.CommonmilgaStructure.SederA, EnteranceRecord.RecordType.Exit), EnteranceRecord.Parse(dataRow[i + 3], CommonLibrary.CommonmilgaStructure.SederB, EnteranceRecord.RecordType.Enter), EnteranceRecord.Parse(dataRow[i + 4], CommonLibrary.CommonmilgaStructure.SederB, EnteranceRecord.RecordType.Exit), flag, flag1);
+                  avrechMonthDatum.AddDayEntry(EnteranceRecord.Parse(dataRow[i], CommonLibrary.CommonmilgaStructure.SederA, EnteranceRecord.RecordType.Enter), EnteranceRecord.Parse(dataRow[i + 1], CommonLibrary.CommonmilgaStructure.SederA, EnteranceRecord.RecordType.Exit), EnteranceRecord.Parse(dataRow[i + 3], CommonLibrary.CommonmilgaStructure.SederB, EnteranceRecord.RecordType.Enter), EnteranceRecord.Parse(dataRow[i + 4], CommonLibrary.CommonmilgaStructure.SederB, EnteranceRecord.RecordType.Exit), flag, flag1, IsOnlySederA, IsOnlySederB);
 								}
 								catch
 								{

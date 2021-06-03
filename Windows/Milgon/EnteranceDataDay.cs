@@ -9,7 +9,14 @@ namespace Milgon
 	{
 		private TimeSpan _TotalTime;
 
-		private TimeSpan _ApprovedTime;
+    [DataMember]
+    public bool IsOnlySederA { get; set; }
+
+    [DataMember]
+    public bool IsOnlySederB { get; set; }
+
+
+    private TimeSpan _ApprovedTime;
 
 		private TimeSpan _MissingTime;
 
@@ -18,7 +25,10 @@ namespace Milgon
 		{
 			get
 			{
-				return this.SederA.ApprovedTime + this.SederB.ApprovedTime;
+        if (IsOnlySederA) return SederA.ApprovedTime;
+        if (IsOnlySederB) return SederB.ApprovedTime;
+
+        return this.SederA.ApprovedTime + this.SederB.ApprovedTime;
 			}
 			private set
 			{
@@ -38,7 +48,9 @@ namespace Milgon
 		{
 			get
 			{
-				return this.SederA.MissingTime + this.SederB.MissingTime;
+        if (IsOnlySederA) return SederA.MissingTime;
+        if (IsOnlySederB) return SederB.MissingTime;
+        return this.SederA.MissingTime + this.SederB.MissingTime;
 			}
 			private set
 			{
@@ -66,7 +78,9 @@ namespace Milgon
 			get
 			{
 				this._TotalTime = this.SederA.TotalTime + this.SederB.TotalTime;
-				return this._TotalTime;
+        if (IsOnlySederA) _TotalTime = SederA.TotalTime;
+        if (IsOnlySederB) _TotalTime = SederB.TotalTime;
+        return this._TotalTime;
 			}
 			private set
 			{

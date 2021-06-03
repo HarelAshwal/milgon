@@ -45,9 +45,12 @@ namespace Milgon
 		{
 		}
 
-		public TimeSpan GetTotalDayTime()
+		public TimeSpan GetTotalDayTime(bool IsOnlySederA, bool IsOnlySederB)
 		{
-			TimeSpan totalSederTime = this.SederA.GetTotalSederTime() + this.SederB.GetTotalSederTime();
+      if (IsOnlySederA) return this.SederA.GetTotalSederTime();
+      if (IsOnlySederB) return this.SederB.GetTotalSederTime();
+
+      TimeSpan totalSederTime = this.SederA.GetTotalSederTime() + this.SederB.GetTotalSederTime();
 			return totalSederTime;
 		}
 	}

@@ -8,7 +8,16 @@ namespace Milgon
 	[DataContract]
 	public class AvrechMonthData
 	{
-		[DataMember]
+
+
+    [DataMember]
+    public bool IsOnlySederA { get; set; }
+
+    [DataMember]
+    public bool IsOnlySederB { get; set; }
+
+
+    [DataMember]
 		public TimeSpan _MissingTime;
 
 		private int _KolelShishiCount;
@@ -247,10 +256,10 @@ namespace Milgon
 				this._MissingTime = value;
 				TimeSpan missingTime = this.MissingTime;
 				double totalMilliseconds = missingTime.TotalMilliseconds * 100;
-				missingTime = this.ExpectedHours;
-				this.NonPresencePrecentage = totalMilliseconds / missingTime.TotalMilliseconds;
+        
+				this.NonPresencePrecentage = totalMilliseconds / this.ExpectedHours.TotalMilliseconds;
 				this.PresencePrecentage = 100 - this.NonPresencePrecentage;
-			}
+      }
 		}
 
 		[DataMember]
@@ -288,7 +297,7 @@ namespace Milgon
 			private set;
 		}
 
-		[DataMember]
+    [DataMember]
 		public int SummaryCount
 		{
 			get;
@@ -316,9 +325,9 @@ namespace Milgon
 			this.BonusSederB = 0;
 		}
 
-		public void AddDayEntry(EnteranceRecord InA, EnteranceRecord OutA, EnteranceRecord InB, EnteranceRecord OutB, bool IsTookAllowedBreakA = false, bool IsTookAllowedBreakB = false)
+		public void AddDayEntry(EnteranceRecord InA, EnteranceRecord OutA, EnteranceRecord InB, EnteranceRecord OutB, bool IsTookAllowedBreakA = false, bool IsTookAllowedBreakB = false, bool IsOnlySederA = false, bool IsOnlySederB =false)
 		{
-			this.entranceDataMonth.AddEntry(InA, OutA, InB, OutB, IsTookAllowedBreakA, IsTookAllowedBreakB);
+      this.entranceDataMonth.AddEntry(InA, OutA, InB, OutB, IsTookAllowedBreakA, IsTookAllowedBreakB, IsOnlySederA, IsOnlySederB);
 			this.CalculateMilga();
 		}
 
@@ -353,12 +362,19 @@ namespace Milgon
 				}
 				MilgaStructure commonmilgaStructure = CommonLibrary.CommonmilgaStructure;
 				double? basicMilga = commonmilgaStructure.BasicMilga;
-				this.MilgaAmount = (double)basicMilga.Value;
-				if ((this.TotalTime != TimeSpan.Zero ? false : this.ApprovedTime == TimeSpan.Zero))
+
+        this.MilgaAmount = (double)basicMilga.Value;
+
+        
+        // seder A only is 55%
+        if (IsOnlySederA) MilgaAmount = (double)commonmilgaStructure.BasicMilga * 0.55;
+        if (IsOnlySederB) MilgaAmount = (double)commonmilgaStructure.BasicMilga * 0.45;
+
+        if ((this.TotalTime != TimeSpan.Zero ? false : this.ApprovedTime == TimeSpan.Zero))
 				{
 					this.MilgaAmount = 0;
 				}
-				TimeSpan totalDayTime = commonmilgaStructure.GetTotalDayTime();
+				TimeSpan totalDayTime = commonmilgaStructure.GetTotalDayTime(this.IsOnlySederA,this.IsOnlySederB);
 				this.ExpectedHours = TimeSpan.FromHours(totalDayTime.TotalHours * (double)this.entranceDataMonth.Days.Count);
 				this.MissingTime = this.entranceDataMonth.TotalMissingTime;
 				double totalHours = this.MissingTime.TotalHours;
@@ -367,33 +383,45 @@ namespace Milgon
 				AvrechMonthData milgaAmount = this;
 				milgaAmount.MilgaAmount = milgaAmount.MilgaAmount - this.MissingHoursReduction;
 				this.MilgaAmountBase = this.MilgaAmount;
+
 				this.BonusSederTotal = 0;
-				int countViolateBonusSederA = this.entranceDataMonth.CountViolateBonusSederA;
-				int lateCountForBonusCanceling = commonmilgaStructure.SederA.LateCountForBonusCanceling.Value;
-				if (countViolateBonusSederA >= lateCountForBonusCanceling)
-				{
-					this.BonusSederA = 0;
-				}
-				else
-				{
-					basicMilga = commonmilgaStructure.SederA.Bonus;
-					this.BonusSederA = (double)basicMilga.Value * (double)this.entranceDataMonth.CountGotBonusSederA;
-					AvrechMonthData bonusSederTotal = this;
-					bonusSederTotal.BonusSederTotal = bonusSederTotal.BonusSederTotal + this.BonusSederA;
-				}
-				countViolateBonusSederA = this.entranceDataMonth.CountViolateBonusSederB;
-				lateCountForBonusCanceling = commonmilgaStructure.SederB.LateCountForBonusCanceling.Value;
-				if (countViolateBonusSederA >= lateCountForBonusCanceling)
-				{
-					this.BonusSederB = 0;
-				}
-				else
-				{
-					basicMilga = commonmilgaStructure.SederB.Bonus;
-					this.BonusSederB = (double)basicMilga.Value * (double)this.entranceDataMonth.CountGotBonusSederB;
-					AvrechMonthData avrechMonthDatum = this;
-					avrechMonthDatum.BonusSederTotal = avrechMonthDatum.BonusSederTotal + this.BonusSederB;
-				}
+
+        int lateCountForBonusCanceling = 0;
+        if (!IsOnlySederB)
+        {
+          int countViolateBonusSederA = this.entranceDataMonth.CountViolateBonusSederA;
+           lateCountForBonusCanceling = commonmilgaStructure.SederA.LateCountForBonusCanceling.Value;
+          if (countViolateBonusSederA >= lateCountForBonusCanceling)
+          {
+            this.BonusSederA = 0;
+          }
+          else
+          {
+            basicMilga = commonmilgaStructure.SederA.Bonus;
+            this.BonusSederA = (double)basicMilga.Value * (double)this.entranceDataMonth.CountGotBonusSederA;
+            AvrechMonthData bonusSederTotal = this;
+            bonusSederTotal.BonusSederTotal = bonusSederTotal.BonusSederTotal + this.BonusSederA;
+          }        
+        }
+
+        int countViolateBonusSederB = 0;
+        if (!IsOnlySederA)
+        {
+          countViolateBonusSederB = this.entranceDataMonth.CountViolateBonusSederB;
+          lateCountForBonusCanceling = commonmilgaStructure.SederB.LateCountForBonusCanceling.Value;
+          if (countViolateBonusSederB >= lateCountForBonusCanceling)
+          {
+            this.BonusSederB = 0;
+          }
+          else
+          {
+            basicMilga = commonmilgaStructure.SederB.Bonus;
+            this.BonusSederB = (double)basicMilga.Value * (double)this.entranceDataMonth.CountGotBonusSederB;
+            AvrechMonthData avrechMonthDatum = this;
+            avrechMonthDatum.BonusSederTotal = avrechMonthDatum.BonusSederTotal + this.BonusSederB;
+          }
+        }
+
 				AvrechMonthData milgaAmount1 = this;
 				milgaAmount1.MilgaAmount = milgaAmount1.MilgaAmount + this.BonusSederTotal;
 				this.MilgaAmountBaseAndBonus = this.MilgaAmount;

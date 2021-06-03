@@ -56,20 +56,21 @@
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\SederType.cs">
+    <Compile Include="Windows\Milgon\SederType.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\App.cs">
+    <Compile Include="Windows\Milgon\App.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\Properties\Resources.Designer.cs">
-      <AutoGen>true</AutoGen>
+    <Compile Include="Windows\Milgon\Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTimeSharedInput>true</DesignTimeSharedInput>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Milgon\DateTimeExtended.cs">
+    <Compile Include="Windows\Milgon\DateTimeExtended.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
@@ -89,7 +90,7 @@
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\GlobalAvrechEntranceData.cs">
+    <Compile Include="Windows\Milgon\GlobalAvrechEntranceData.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
@@ -97,11 +98,11 @@
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\MilgaStructure.cs">
+    <Compile Include="Windows\Milgon\MilgaStructure.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\CommonLibrary.cs">
+    <Compile Include="Windows\Milgon\CommonLibrary.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
@@ -111,27 +112,27 @@
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Milgon\Seder.cs">
+    <Compile Include="Windows\Milgon\Seder.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\Commands.cs">
+    <Compile Include="Windows\Milgon\Commands.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\MyCommand.cs">
+    <Compile Include="Windows\Milgon\MyCommand.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\CommonLibraryExtensions.cs">
+    <Compile Include="Windows\Milgon\CommonLibraryExtensions.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\Properties\Settings.cs">
+    <Compile Include="Windows\Milgon\Properties\Settings.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\AvrechMonthData.cs">
+    <Compile Include="Windows\Milgon\AvrechMonthData.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
@@ -151,11 +152,11 @@
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\EnteranceDataMonth.cs">
+    <Compile Include="Windows\Milgon\EnteranceDataMonth.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\EnteranceDataDay.cs">
+    <Compile Include="Windows\Milgon\EnteranceDataDay.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
@@ -165,11 +166,11 @@
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Milgon\EnteranceEntry.cs">
+    <Compile Include="Windows\Milgon\EnteranceEntry.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Milgon\EnteranceRecord.cs">
+    <Compile Include="Windows\Milgon\EnteranceRecord.cs">
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
@@ -183,7 +184,7 @@
       <AutoGen>false</AutoGen>
       <DesignTimeSharedInput>false</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Milgon\Properties\Resources.resx">
+    <EmbeddedResource Include="Windows\Milgon\Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

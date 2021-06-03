@@ -11,7 +11,7 @@ namespace Milgon
 	{
 		private TimeSpan _TotalTime;
 
-		[DataMember]
+    [DataMember]
 		public int CountGotBonusSederA
 		{
 			get;
@@ -234,14 +234,17 @@ namespace Milgon
 			this.Days = new List<EnteranceDataDay>();
 		}
 
-		public void AddEntry(EnteranceRecord InA, EnteranceRecord OutA, EnteranceRecord InB, EnteranceRecord OutB, bool IsTookAllowedBreakA = false, bool IsTookAllowedBreakB = false)
-		{
+		public void AddEntry(EnteranceRecord InA, EnteranceRecord OutA, EnteranceRecord InB, EnteranceRecord OutB, bool IsTookAllowedBreakA = false, bool IsTookAllowedBreakB = false, bool IsOnlySederA =false, bool IsOnlySederB=false)
+    {
 			EnteranceDataDay enteranceDataDay = new EnteranceDataDay();
 			DateTime recordTime = InA.RecordTime;
 			enteranceDataDay.DayDate = DateTime.Parse(recordTime.ToShortDateString());
 			enteranceDataDay.AddEntry(SederType.A, InA, OutA, IsTookAllowedBreakA);
 			enteranceDataDay.AddEntry(SederType.B, InB, OutB, IsTookAllowedBreakB);
-			this.Days.Add(enteranceDataDay);
+      enteranceDataDay.IsOnlySederA = IsOnlySederA;
+      enteranceDataDay.IsOnlySederB = IsOnlySederB;
+
+      this.Days.Add(enteranceDataDay);
 			this.UpdateTotalTime();
 		}
 
